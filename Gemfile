@@ -7,6 +7,7 @@ gem 'puma'
 gem 'capistrano'
 gem 'awesome_print'
 gem 'faraday'
+gem 'httparty'
 
 gem 'pry', groups: [:test, :development]
 
