@@ -6,7 +6,7 @@ class HooksController < ApplicationController
   end
 
   get_or_post "/" do
-    File.open("log/amici.log", 'a') { |file| file.write("Request received at: #{Time.now}: \n" + request.inspect) }
+    File.open("log/amici.log", 'a') { |file| file.write("Request received at: #{Time.now}: \n" + request.inspect + "\n" + params.inspect) }
     "Thanks, GitHub! :D"
   end
 
