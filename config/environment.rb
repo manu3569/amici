@@ -4,6 +4,8 @@ Bundler.require(:default, ENV['RACK_ENV'])
 
 ENV['RACK_ENV'] ||= 'development'
 
+CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
+CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
 DB = Sequel.connect("sqlite://db/amici-#{ENV['RACK_ENV']}.db")
 
