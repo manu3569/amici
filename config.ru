@@ -1,6 +1,6 @@
 require './config/environment.rb'
 
-log = Logger.new('log/amici.log')
+log = File.new("log/amici.log", "a")
 STDOUT.reopen(log)
 STDERR.reopen(log)
 
