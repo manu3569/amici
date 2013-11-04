@@ -72,3 +72,119 @@ Forks:
 -> POST /forks/push
 
 #curl -H 'Authorization: token c8893b4ef96cf423f3fe52d01c8f312beb76230e' "Content-Type: application/json" -X POST -d '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}' https://api.github.com/repos/loganhasson/pollywog-ranch-rails-ruby-003/hooks
+
+# "ref":"refs/heads/<branch_name>"
+# "head_commit"["id"] = <commit_id>
+# "head_commit"["timestamp"] = <UTC Timestring>
+# "repository"["name"] = <repo_name>
+# "repository"["owner"]["name"] = <github_username>
+# "repository"["owner"]["email"] = <email>
+# "repository"["open_issues"] = <issue_count>
+
+
+{
+            "ref" => "refs/heads/test-branch",
+          "after" => "d972455f48bcb2527c342027695a98ef71a48105",
+         "before" => "0000000000000000000000000000000000000000",
+        "created" => true,
+        "deleted" => false,
+         "forced" => true,
+        "compare" => "https://github.com/loganhasson/pollywog-ranch-associations-ruby-003/compare/9863cdba1826^...d972455f48bc",
+        "commits" => [
+        [0] {
+                   "id" => "9863cdba18263a2a63b387c3e4a1a365f0a1b19e",
+             "distinct" => true,
+              "message" => "Updating time",
+            "timestamp" => "2013-11-04T13:37:15-08:00",
+                  "url" => "https://github.com/loganhasson/pollywog-ranch-associations-ruby-003/commit/9863cdba18263a2a63b387c3e4a1a365f0a1b19e",
+               "author" => {
+                    "name" => "Logan Hasson",
+                   "email" => "logan.hasson@gmail.com",
+                "username" => "loganhasson"
+            },
+            "committer" => {
+                    "name" => "Logan Hasson",
+                   "email" => "logan.hasson@gmail.com",
+                "username" => "loganhasson"
+            },
+                "added" => [],
+              "removed" => [],
+             "modified" => [
+                [0] "random.file"
+            ]
+        },
+        [1] {
+                   "id" => "d972455f48bcb2527c342027695a98ef71a48105",
+             "distinct" => true,
+              "message" => "Updating time",
+            "timestamp" => "2013-11-04T13:38:04-08:00",
+                  "url" => "https://github.com/loganhasson/pollywog-ranch-associations-ruby-003/commit/d972455f48bcb2527c342027695a98ef71a48105",
+               "author" => {
+                    "name" => "Logan Hasson",
+                   "email" => "logan.hasson@gmail.com",
+                "username" => "loganhasson"
+            },
+            "committer" => {
+                    "name" => "Logan Hasson",
+                   "email" => "logan.hasson@gmail.com",
+                "username" => "loganhasson"
+            },
+                "added" => [],
+              "removed" => [],
+             "modified" => [
+                [0] "random.file"
+            ]
+        }
+    ],
+    "head_commit" => {
+               "id" => "d972455f48bcb2527c342027695a98ef71a48105",
+         "distinct" => true,
+          "message" => "Updating time",
+        "timestamp" => "2013-11-04T13:38:04-08:00",
+              "url" => "https://github.com/loganhasson/pollywog-ranch-associations-ruby-003/commit/d972455f48bcb2527c342027695a98ef71a48105",
+           "author" => {
+                "name" => "Logan Hasson",
+               "email" => "logan.hasson@gmail.com",
+            "username" => "loganhasson"
+        },
+        "committer" => {
+                "name" => "Logan Hasson",
+               "email" => "logan.hasson@gmail.com",
+            "username" => "loganhasson"
+        },
+            "added" => [],
+          "removed" => [],
+         "modified" => [
+            [0] "random.file"
+        ]
+    },
+     "repository" => {
+                   "id" => 14098236,
+                 "name" => "pollywog-ranch-associations-ruby-003",
+                  "url" => "https://github.com/loganhasson/pollywog-ranch-associations-ruby-003",
+          "description" => "Pollywog Ranch",
+             "watchers" => 0,
+           "stargazers" => 0,
+                "forks" => 0,
+                 "fork" => true,
+                 "size" => 112,
+                "owner" => {
+             "name" => "loganhasson",
+            "email" => "logan.hasson@gmail.com"
+        },
+              "private" => true,
+          "open_issues" => 0,
+           "has_issues" => false,
+        "has_downloads" => true,
+             "has_wiki" => true,
+             "language" => "Ruby",
+           "created_at" => 1383531032,
+            "pushed_at" => 1383601087,
+        "master_branch" => "master",
+         "organization" => "flatiron-school"
+    },
+         "pusher" => {
+         "name" => "loganhasson",
+        "email" => "logan.hasson@gmail.com"
+    }
+}
