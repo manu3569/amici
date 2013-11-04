@@ -6,13 +6,7 @@ class HooksController < ApplicationController
   end
 
   get_or_post "/" do
-    puts ""
-    puts ""
-    puts "Request received at: #{Time.now}: "
-    puts ""
-    ap request.inspect
-    puts ""
-    puts ""
+    File.open("log/amici.log", 'a') { |file| file.write("Request received at: #{Time.now}: \n" + request.inspect) }
   end
 
 end
