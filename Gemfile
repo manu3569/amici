@@ -6,6 +6,7 @@ gem 'sqlite3'
 gem 'puma'
 gem 'capistrano'
 gem 'awesome_print'
+gem 'faraday'
 
 gem 'pry', groups: [:test, :development]
 
