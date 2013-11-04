@@ -6,8 +6,9 @@ class ApplicationController < Sinatra::Base
 
   set :views, Proc.new { File.join(root, "../views/") }
 
-  get '/' do
-    "Hello World!"
+  def get_or_post(url, &block)
+    get(url, &block)
+    post(url, &block)
   end
 
 end

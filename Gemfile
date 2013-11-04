@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'sequel'
 gem 'sqlite3'
 gem 'puma'
+gem 'capistrano'
 
 gem 'pry', groups: [:test, :development]
 
