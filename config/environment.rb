@@ -1,4 +1,5 @@
-require 'bundler'  
+require 'bundler'
+require 'json'
 Bundler.require(:default, ENV['RACK_ENV'])
 
 ENV['RACK_ENV'] ||= 'development'

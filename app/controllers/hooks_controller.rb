@@ -1,11 +1,16 @@
 class HooksController < ApplicationController
 
+
+  get "/about" do
+    "This is amici!"
+  end
+
   get_or_post "/" do
     puts ""
     puts ""
     puts "Request received at: #{Time.now}: "
     puts ""
-    puts params.inspect
+    ap request.inspect
     puts ""
     puts ""
   end
