@@ -6,7 +6,7 @@ class HooksController < ApplicationController
   end
 
   get_or_post "/" do
-    File.open("log/amici.log", 'a') { |file| file.write("Request received at: #{Time.now}: \n" + JSON.parse(request.env["rack.input"].read)) }
+    File.open("log/amici.log", 'a') { |file| file.write("Request received at: #{Time.now}: \n" + request.env["rack.input"].read) }
     "Thanks, GitHub! :D"
 
     # erb :index, :locals => {:client_id => CLIENT_ID}
