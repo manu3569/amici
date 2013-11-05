@@ -1,92 +1,46 @@
-require 'faraday'
 require 'net/http'
-require 'httparty'
-require 'patron'
-# require 'rest-open-uri'
+require 'net/https'
+require 'uri'
+require 'json'
 
-# uri = URI('https://api.github.com/repos/loganhasson/the-big-todo-ruby-003/hooks')
-# request = Net::HTTP::Post.new(uri)
+uri = URI("https://api.github.com/repos/manu3569/pollywog-ranch-rails-ruby-003/hooks")
 
-# strash = '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}'
+header = {"Content-Type" => "application/json", "Authorization" => "token 5fccefe0e2a3944bfd65b030eb2140de3338f3fd"}
+body   = '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}'
 
-# request.set_form_data(strash)
+id = nil
 
-# request["Authorization"] = "token c8893b4ef96cf423f3fe52d01c8f312beb76230e"
-# request["Content-Type"]  = "application/json"
+# Create Hook
+Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+  request = Net::HTTP::Post.new(uri, header)
+  request.body = body
+  response = http.request(request)  
+  puts JSON.parse(response.body)
+end
 
-# result = Net::HTTP.start(uri.hostname, uri.port) do |http|
-#   http.request(request)
-# end
 
-# case result
-# when Net::HTTPSuccess, Net::HTTPRedirection
-#   puts result.inspect
-#   puts 
-# else
-#   result.value
-# end
+# List Hooks
+Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+  request = Net::HTTP::Get.new(uri, header)
+  response = http.request(request)  
+  json = JSON.parse(response.body)
+  puts json
+  id = json.first["id"]
+end
 
-###########
+uri = URI("https://api.github.com/repos/manu3569/pollywog-ranch-rails-ruby-003/hooks/#{id}")
 
-session = Patron::Session.new
-session.timeout = 10
-session.base_url = "https://api.github.com"
-session.headers['Authorization'] = 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e'
+# Delete Hook
+Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+  request = Net::HTTP::Delete.new(uri, header)
+  response = http.request(request)  
+  puts response.body.inspect
+end
 
-session.post("/repos/loganhasson/the-big-todo-ruby-003/hooks", '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}', {"Content-Type" => "application/json"})
-
-###########
-
-# Net::HTTP.post_form(uri, :headers => {'Authorization' =>'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
-#                                       'Content-Type' => 'application/json'},
-#                          :content => {'name' => 'web',
-#                                       'active' => true,
-#                                       'events' => ['push', 'fork'],
-#                                       'config' => {'url' => 'http://162.243.77.173/', 'content_type' => 'json'}
-#                                      }
-#                     )
-
-# open('https://api.github.com/loganhasson/the-big-todo-ruby-003/hook',
-#                 :method => :post,
-#                 :headers => {'Authorization' => 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
-#                              'Content-Type' => 'application/json'
-#                             },
-#                 :body => {"name" => "web",
-#                           "active" => true,
-#                           "events" => ["push", "fork"],
-#                           "config" => {"url" => "http://162.243.77.173/", "content_type" => "json"}
-#                          }
-#     )
-
-###########
-
-# result = HTTParty.post('https://api.github.com/loganhasson/the-big-todo-ruby-003/hooks',
-#     :headers => { 'Authorization' => 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
-#                   'Content-Type' => 'application/json',
-#                   "User-Agent" => "codecademy"
-#                 },
-#     :body => { "name" => "web",
-#                "active" => true,
-#                "events" => ["push", "fork"],
-#                "config" => {"url" => "http://162.243.77.173/", "content_type" => "json"}
-#              }
-#     )
-
-############
-
-# conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
-#   faraday.request  :url_encoded             # form-encode POST params
-#   faraday.response :logger                  # log requests to STDOUT
-#   faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-# end
-
-# path = '/repos/loganhasson/pollywog-ranch-rails-ruby-003/hooks'
-# strash = '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}'
-
-# response = conn.post do |req|
-#   req.url path
-#   req.headers['Authorization'] = 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e'
-#   req.headers['Content-Type'] = 'application/json'
-#   req.body = strash
-# end
-
+uri = URI("https://api.github.com/repos/manu3569/pollywog-ranch-rails-ruby-003/hooks")
+# List Hooks
+Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+  request = Net::HTTP::Get.new(uri, header)
+  response = http.request(request)  
+  puts response.body.inspect
+        end

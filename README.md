@@ -71,7 +71,15 @@ Forks:
 * push  - Any git push to a Repository.
 -> POST /forks/push
 
-#curl -H 'Authorization: token c8893b4ef96cf423f3fe52d01c8f312beb76230e' "Content-Type: application/json" -X POST -d '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}' https://api.github.com/repos/loganhasson/pollywog-ranch-rails-ruby-003/hooks
+# LIST
+curl -H 'Authorization: token 5fccefe0e2a3944bfd65b030eb2140de3338f3fd' -H "Content-Type: application/json" -X GET  https://api.github.com/repos/manu3569/pollywog-ranch-rails-ruby-003/hooks
+
+# SET
+curl -H 'Authorization: token 5fccefe0e2a3944bfd65b030eb2140de3338f3fd' -H "Content-Type: application/json" -X POST -d '{"name": "web", "active": true, "events": ["push"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}' https://api.github.com/repos/manu3569/pollywog-ranch-rails-ruby-003/hooks
+
+# DELETE
+curl -H 'Authorization: token 5fccefe0e2a3944bfd65b030eb2140de3338f3fd' -H "Content-Type: application/json" -X DELETE https://api.github.com/repos/manu3569/pollywog-ranch-rails-ruby-003/hooks/1440633
+
 
 # "ref":"refs/heads/<branch_name>"
 # "head_commit"["id"] = <commit_id>
