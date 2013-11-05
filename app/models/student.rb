@@ -6,11 +6,11 @@ class Student < Sequel::Model
     uri = URI("https://api.github.com/user?access_token=#{self.token}")
 
     info = nil
-    
+
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       request = Net::HTTP::Get.new("https://api.github.com/user?access_token=#{self.token}")
       response = http.request(request)
-      info = JSON.parse(response)
+      info = JSON.parse(response.body)
     end
 
     first_name, last_name = info["name"].split(' ', 2)
