@@ -24,8 +24,6 @@ class AuthorizationController < ApplicationController
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         response = http.request(request)
         # binding.pry
-        response.inspect +
-        response.body +
         JSON.parse(response.body).to_s
       end
 
