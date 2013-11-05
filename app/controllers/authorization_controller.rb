@@ -19,11 +19,10 @@ class AuthorizationController < ApplicationController
                  :code => temporary_code }
       
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-        request = Net::HTTP::Post.new(uri)
+        request = Net::HTTP::Post.new('https://github.com/login/oauth/access_token/', header)
         request.set_form_data = values
         response = http.request(request)  
-        # JSON.parse(response.body)
-        response.body
+        JSON.parse(response.body)
       end
 
     rescue Exception => e
