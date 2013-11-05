@@ -26,7 +26,7 @@ class AuthorizationController < ApplicationController
         # binding.pry
         response.inspect +
         response.body +
-        JSON.parse(response.body)
+        JSON.parse(response.body).to_s
       end
 
     rescue Exception => e
