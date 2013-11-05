@@ -17,11 +17,10 @@ class AuthorizationController < ApplicationController
     values = { 'client_id' => CLIENT_ID,
                'client_secret' => CLIENT_SECRET,
                'code' => temporary_code }
-
-    request = Net::HTTP::Post.new('https://github.com/login/oauth/access_token/', header)
-    request.form_data = values
     
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Post.new('https://github.com/login/oauth/access_token/', header)
+      request.form_data = values
       response = http.request(request)
       token = JSON.parse(response.body)["access_token"]
       @student = Student.create(:token => token)

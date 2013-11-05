@@ -8,7 +8,7 @@ class Student < Sequel::Model
     info = nil
     
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      request = Net::HTTP::Get.new(uri)
+      request = Net::HTTP::Get.new("https://api.github.com/user?access_token=#{self.token}")
       response = http.request(request)
       info = JSON.parse(response)
     end
