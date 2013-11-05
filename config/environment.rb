@@ -1,6 +1,8 @@
 require 'bundler'
 require 'json'
 require 'net/http'
+require 'net/https'
+require 'uri'
 
 Bundler.require(:default, ENV['RACK_ENV'])
 
