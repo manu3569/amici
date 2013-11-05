@@ -1,9 +1,10 @@
 require 'faraday'
 require 'net/http'
 require 'httparty'
+require 'patron'
 # require 'rest-open-uri'
 
-uri = URI('https://api.github.com/repos/loganhasson/the-big-todo-ruby-003/hooks')
+# uri = URI('https://api.github.com/repos/loganhasson/the-big-todo-ruby-003/hooks')
 # request = Net::HTTP::Post.new(uri)
 
 # strash = '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}'
@@ -26,6 +27,13 @@ uri = URI('https://api.github.com/repos/loganhasson/the-big-todo-ruby-003/hooks'
 # end
 
 ###########
+
+session = Patron::Session.new
+session.timeout = 10
+session.base_url = "https://api.github.com"
+session.headers['Authorization'] = 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e'
+
+session.post("/repos/loganhasson/the-big-todo-ruby-003/hooks", '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}', {"Content-Type" => "application/json"})
 
 ###########
 
