@@ -1,5 +1,7 @@
 require 'bundler'
 require 'json'
+require 'net/http'
+
 Bundler.require(:default, ENV['RACK_ENV'])
 
 ENV['RACK_ENV'] ||= 'development'
