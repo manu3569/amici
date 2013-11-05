@@ -18,13 +18,12 @@ class AuthorizationController < ApplicationController
                  :client_secret => CLIENT_SECRET,
                  :code => temporary_code }
       
-      Net::HTTP.start(uri.host, uri.port) do |http|
-        request = Net::HTTP::Post.new(uri, header)
+      Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        request = Net::HTTP::Post.new(uri)
         request.set_form_data = values
-        http.use_ssl   = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
         response = http.request(request)  
-        JSON.parse(response.body)
+        # JSON.parse(response.body)
+        response.body
       end
 
     rescue Exception => e
