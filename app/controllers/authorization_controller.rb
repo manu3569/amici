@@ -13,7 +13,7 @@ class AuthorizationController < ApplicationController
       
       temporary_code = params[:code]
       uri = URI('https://github.com/login/oauth/access_token/')
-      header = { accept: :json }
+      header = { 'accept' => 'json' }
       values = { :client_id => CLIENT_ID,
                  :client_secret => CLIENT_SECRET,
                  :code => temporary_code }
