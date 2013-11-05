@@ -1,8 +1,9 @@
 require 'faraday'
 require 'net/http'
 require 'httparty'
+# require 'rest-open-uri'
 
-# uri = URI('https://api.github.com/repos/loganhasson/pollywog-ranch-rails-ruby-003/hooks')
+uri = URI('https://api.github.com/repos/loganhasson/the-big-todo-ruby-003/hooks')
 # request = Net::HTTP::Post.new(uri)
 
 # strash = '{"name": "web", "active": true, "events": ["push", "fork"], "config": {"url": "http://162.243.77.173/", "content_type": "json"}}'
@@ -26,16 +27,42 @@ require 'httparty'
 
 ###########
 
-result = HTTParty.post('https://api.github.com/repos/loganhasson/pollywog-ranch-rails-ruby-003/hooks', 
-    :body => { "name": "web",
-               "active": true,
-               "events": ["push", "fork"],
-               "config": {"url": "http://162.243.77.173/", "content_type": "json"}
-             },
-    :headers => { 'Authorization' => 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
-                  'Content-Type' => 'application/json'
-                }
-    )
+###########
+
+# Net::HTTP.post_form(uri, :headers => {'Authorization' =>'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
+#                                       'Content-Type' => 'application/json'},
+#                          :content => {'name' => 'web',
+#                                       'active' => true,
+#                                       'events' => ['push', 'fork'],
+#                                       'config' => {'url' => 'http://162.243.77.173/', 'content_type' => 'json'}
+#                                      }
+#                     )
+
+# open('https://api.github.com/loganhasson/the-big-todo-ruby-003/hook',
+#                 :method => :post,
+#                 :headers => {'Authorization' => 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
+#                              'Content-Type' => 'application/json'
+#                             },
+#                 :body => {"name" => "web",
+#                           "active" => true,
+#                           "events" => ["push", "fork"],
+#                           "config" => {"url" => "http://162.243.77.173/", "content_type" => "json"}
+#                          }
+#     )
+
+###########
+
+# result = HTTParty.post('https://api.github.com/loganhasson/the-big-todo-ruby-003/hooks',
+#     :headers => { 'Authorization' => 'token c8893b4ef96cf423f3fe52d01c8f312beb76230e',
+#                   'Content-Type' => 'application/json',
+#                   "User-Agent" => "codecademy"
+#                 },
+#     :body => { "name" => "web",
+#                "active" => true,
+#                "events" => ["push", "fork"],
+#                "config" => {"url" => "http://162.243.77.173/", "content_type" => "json"}
+#              }
+#     )
 
 ############
 

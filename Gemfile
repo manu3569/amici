@@ -8,6 +8,7 @@ gem 'capistrano'
 gem 'awesome_print'
 gem 'faraday'
 gem 'httparty'
+gem 'rest-open-uri'
 
 gem 'pry', groups: [:test, :development]
 
