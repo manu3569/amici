@@ -32,7 +32,7 @@ class AuthorizationController < ApplicationController
     "<h1>Welcome to amici, #{@student.first_name}</h1>"
   
     rescue Exception => e
-      "Message: " + e.message + "\nBacktrace: " + e.backtrace.inspect
+      "<pre>Message: " + e.message + "\nBacktrace: " + e.backtrace.inspect
     end
 
   end
