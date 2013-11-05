@@ -8,7 +8,8 @@ class AuthorizationController < ApplicationController
   end
 
   get '/sign-up/callback/?' do
-    temporary_code = params["code"]
+    begin
+    temporary_code = params[:code]
 
     uri = URI('https://github.com/login/oauth/access_token')
     values = { :client_id => CLIENT_ID,
@@ -18,7 +19,9 @@ class AuthorizationController < ApplicationController
     response = Net::HTTP.post_form(uri, values, accept: :json)
 
     puts response.body
-
+    rescue Exception => e
+      "Message: " + e.message + "<br/>" + "Backtrace: " + e.backtrace.inspect
+    end
   end
 
 end
