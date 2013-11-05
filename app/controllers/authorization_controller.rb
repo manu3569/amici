@@ -23,7 +23,8 @@ class AuthorizationController < ApplicationController
     
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       response = http.request(request)
-      @student = Student.create(:token => JSON.parse(response.body)["access_token"])
+      token = JSON.parse(response.body)["access_token"]
+      @student = Student.create(:token => token)
     end
 
     @student.update_info
@@ -33,7 +34,7 @@ class AuthorizationController < ApplicationController
     rescue Exception => e
       "Message: " + e.message + "\nBacktrace: " + e.backtrace.inspect
     end
-    
+
   end
 
 end
