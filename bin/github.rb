@@ -43,4 +43,4 @@ Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
   request = Net::HTTP::Get.new(uri, header)
   response = http.request(request)  
   puts response.body.inspect
-        end
+end
