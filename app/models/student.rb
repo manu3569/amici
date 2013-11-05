@@ -4,8 +4,15 @@ class Student < Sequel::Model
 
   def update_info
     uri = URI("https://api.github.com/user?access_token=#{self.token}")
-    response = Net::HTTP.get(uri)
-    info = JSON.parse(response)
+
+    info = nil
+    
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Get.new(uri)
+      response = http.request(request)
+      info = JSON.parse(response)
+    end
+
     first_name, last_name = info["name"].split(' ', 2)
     attributes = {
                   :first_name      => first_name,
@@ -15,5 +22,5 @@ class Student < Sequel::Model
                 }
     self.update(attributes)
   end
-  
+
 end
