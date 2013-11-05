@@ -13,15 +13,19 @@ class AuthorizationController < ApplicationController
       
       temporary_code = params[:code]
       uri = URI('https://github.com/login/oauth/access_token/')
-      header = { 'accept' => 'json' }
-      values = { :client_id => CLIENT_ID,
-                 :client_secret => CLIENT_SECRET,
-                 :code => temporary_code }
+      header = { 'Accept' => 'application/json' }
+      values = { 'client_id' => CLIENT_ID,
+                 'client_secret' => CLIENT_SECRET,
+                 'code' => temporary_code }
+
+      request = Net::HTTP::Post.new('https://github.com/login/oauth/access_token/', header)
+      request.form_data = values
       
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-        request = Net::HTTP::Post.new('https://github.com/login/oauth/access_token/', header)
-        request.set_form_data = values
-        response = http.request(request)  
+        response = http.request(request)
+        # binding.pry
+        response.inspect +
+        response.body +
         JSON.parse(response.body)
       end
 
