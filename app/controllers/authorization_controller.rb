@@ -8,7 +8,9 @@ class AuthorizationController < ApplicationController
   end
 
   get '/sign-up/callback/?' do
-      
+    
+    begin
+
     temporary_code = params[:code]
     uri = URI('https://github.com/login/oauth/access_token/')
     header = { 'Accept' => 'application/json' }
@@ -28,6 +30,10 @@ class AuthorizationController < ApplicationController
 
     "<h1>Welcome to amici, #{@student.first_name}</h1>"
   
+    rescue Exception => e
+      "Message: " + e.message + "\nBacktrace: " + e.backtrace.inspect
+    end
+    
   end
 
 end
