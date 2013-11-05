@@ -8,7 +8,7 @@ class AuthorizationController < ApplicationController
   end
 
   get '/sign-up/callback/?' do
-    temporary_code = params["code"]
+    temporary_code = request.env['rack.request.query_hash']["code"]
 
     uri = URI('https://github.com/login/oauth/access_token')
     values = { :client_id => CLIENT_ID,
