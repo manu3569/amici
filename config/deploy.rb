@@ -17,6 +17,7 @@ set :user, 'deploy' # Whatever the User You Make on Your Server
 # You should get the output of your server's SSH Key.
 # Add it to your account: https://github.com/settings/ssh
 
+set :branch, fetch(:branch, "master")
 
 set :repository,  "git@github.com:manu3569/amici.git" # The address of your fork's clone URL
 
