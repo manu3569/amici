@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get  '/users/new/?' do
-    params = URI.encode_www_form({ client_id: CLIENT_ID, scope: "repo" })
+    params = URI.encode_www_form({ client_id: CLIENT_ID, scope: "repo,user:email" })
     @uri = "https://github.com/login/oauth/authorize/?#{params}"
     erb :"users/new"
   end
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   get '/users/:id/?' do
     if @student = Student[params[:id]]
-      "<h1>Welcome to amici, #{@student.first_name}</h1>"
+      "<h1>Welcome to amici, #{@student.first_name}, #{@student.token}</h1>"
     else
       "I don't know you. Create account!"
     end

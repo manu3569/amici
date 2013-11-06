@@ -16,10 +16,19 @@ class Student < Sequel::Model
 
     first_name, last_name = info["name"].split(' ', 2)
 
+    emails = nil
+
+    header = { 'Accept' => 'application/vnd.github.v3' }
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Get.new("/user/emails?access_token=#{token}", header)
+      response = http.request(request)
+      emails = JSON.parse(response.body, :symbolize_names => true)
+    end
+
     {
       first_name: first_name,
       last_name: last_name,
-      email: info["email"],
+      email: emails.find { |e| e[:primary] }[:email],
       github_username: info["login"],
       token: token
     }
