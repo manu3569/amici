@@ -21,7 +21,9 @@ class UsersController < ApplicationController
       token = JSON.parse(response.body)["access_token"]
       
       student_details = Student.retrieve_user_details(token)
-      @student = Student.find_or_create(:token => token)
+      github_username = student_details[:github_username]
+
+      @student = Student.find_or_create(:github_username => github_username)
       @student.update(student_details)
     end
 
