@@ -19,22 +19,30 @@ class UsersController < ApplicationController
       request.form_data = data
       response = http.request(request)
       token = JSON.parse(response.body)["access_token"]
-      @student = Student.new(:token => token)
-      @student.update_info
+      
+      student_details = Student.retrieve_user_details(token)
+      @student = Student.find_or_create(student_details)
+      @student.token = token
       @student.save
     end
 
 
-    "<h1>Welcome to amici, #{@student.first_name}</h1>"
   
     rescue Exception => e
-      "<pre>Message: " + e.message + "\nBacktrace: " + e.backtrace.inspect
+      "Message: " + e.message + "<br><br>Backtrace: " + e.backtrace.inspect
+    
+    else
+      redirect "/users/#{@student.id}"
     end
 
   end
 
   get '/users/:id/?' do
-    
+    if @student = Student[params[:id]]
+      "<h1>Welcome to amici, #{@student.first_name}</h1>"
+    else
+      "I don't know you. Create account!"
+    end
   end
 
 
