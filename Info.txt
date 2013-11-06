@@ -1,0 +1,20 @@
+- user needs to register app and provide client id & secret
+- next, user needs to authorize application (used for watching forks, pushes)
+
+
+- pull all repos
+https://api.github.com/user/repos
+Returns array with hashes:
+"name": "sinatra-deploy-ruby-003"
+
+- add create listener
+- add push listener, and fork listener to all repos
+
+- check if Amicifile exists
+https://api.github.com/repos/manu3569/amici/contents/Amicifile?access_token=$TOKEN
+
+----
+- create or update local "assignment"
+
+Returns hash with:
+ "message": "Not Found"

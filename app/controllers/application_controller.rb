@@ -1,6 +1,4 @@
 class ApplicationController < Sinatra::Base
-  
-  helpers Sinatra::FormHelpers
 
   configure :development do
     register Sinatra::Reloader
