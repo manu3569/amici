@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   get  '/users/new/?' do
-    params = URI.encode_www_form({ client_id: CLIENT_ID, scope: "repo,user:email" })
+    params = URI.encode_www_form({
+      client_id: Setup.client_id, 
+      scope: "repo,user:email",
+      redirect_uri: Setup.user_auth_url
+      })
     @uri = "https://github.com/login/oauth/authorize/?#{params}"
     erb :"users/new"
   end
@@ -10,8 +14,8 @@ class UsersController < ApplicationController
     begin
     uri = URI('https://github.com/')
     header = { 'Accept' => 'application/json' }
-    data   = { 'client_id' => CLIENT_ID,
-               'client_secret' => CLIENT_SECRET,
+    data   = { 'client_id' => Setup.client_id,
+               'client_secret' => Setup.client_secret,
                'code' => params[:code] }
     
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|

@@ -5,11 +5,9 @@ require 'json'
 require 'net/http'
 require 'net/https'
 require 'uri'
+require 'open-uri'
 
 ENV['RACK_ENV'] ||= 'development'
-
-CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
 DB = Sequel.connect("sqlite://db/amici-#{ENV['RACK_ENV']}.db")
 
