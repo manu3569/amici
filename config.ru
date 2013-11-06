@@ -1,6 +1,6 @@
 require './config/environment.rb'
 
+use SetupController
 use UsersController
-use AuthorizationController
 use HooksController
 run ApplicationController
