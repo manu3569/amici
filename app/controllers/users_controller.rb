@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     begin
     uri = URI('https://github.com/')
     header = { 'Accept' => 'application/json' }
-    data = { 'client_id' => CLIENT_ID,
+    data   = { 'client_id' => CLIENT_ID,
                'client_secret' => CLIENT_SECRET,
                'code' => params[:code] }
     
@@ -21,9 +21,8 @@ class UsersController < ApplicationController
       token = JSON.parse(response.body)["access_token"]
       
       student_details = Student.retrieve_user_details(token)
-      @student = Student.find_or_create(student_details)
-      @student.token = token
-      @student.save
+      @student = Student.find_or_create(:token => token)
+      @student.update(student_details)
     end
 
 

@@ -20,7 +20,8 @@ class Student < Sequel::Model
       first_name: first_name,
       last_name: last_name,
       email: info["email"],
-      github_username: info["login"]
+      github_username: info["login"],
+      token: token
     }
   end
 
