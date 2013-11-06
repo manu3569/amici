@@ -21,7 +21,7 @@ class Setup < Sequel::Model
   end
 
   def self.grab_username
-    git_path = File.expand_path('./config', File.dirname(__FILE__))
+    git_path = File.expand_path('./.git/config', File.dirname(__FILE__))
     File.read(git_path).match(/\[remote "origin"\]\n.+github.com.(.+)\/amici.git/)[1]
   end
 
