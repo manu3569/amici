@@ -21,7 +21,7 @@ class Setup < Sequel::Model
   end
 
   def self.grab_username
-    File.read(".git/config").match(/\[remote "origin"\]\n.+github.com.(.+)\/amici.git/)[1]
+    File.read(".git/config").match(/\[remote "origin"\]\n?.*\n?.*github.com.(.+)\/amici.git/)[1]
   end
 
   def self.ip
